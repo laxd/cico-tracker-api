@@ -33,7 +33,7 @@ class WeightController(
     }
 
     @GetMapping("/current")
-    fun getCurrentWeight(): WeightRecording {
+    fun getCurrentWeight(): WeightRecording? {
         return weightService.getMostRecent()
     }
 

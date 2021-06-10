@@ -38,8 +38,8 @@ class WeightService(
         weightRepository.findFirstByDateAfter(date)
     }
 
-    fun getMostRecent(): WeightRecording {
-        return weightRepository.findFirstByOrderByDateAsc()
+    fun getMostRecent(): WeightRecording? {
+        return weightRepository.findFirstByOrderByDateDesc()
     }
 
     fun getChange(from: LocalDate, to: LocalDate): Double {

@@ -8,6 +8,6 @@ interface WeightRepository: CrudRepository<WeightRecording, Int> {
     fun findAllByOrderByDate(): List<WeightRecording>
     fun findByDateBetween(from: LocalDate, to: LocalDate): List<WeightRecording>
     fun findFirstByDateAfter(date: LocalDate): WeightRecording?
-    fun findFirstByOrderByDateAsc(): WeightRecording
+    fun findFirstByOrderByDateDesc(): WeightRecording?
 
 }
