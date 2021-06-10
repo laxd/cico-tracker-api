@@ -40,9 +40,9 @@ class WeightController(
     @GetMapping("/change")
     fun getChange(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) since: LocalDate,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate?
     ): Double {
-        return weightService.getChange(since, to)
+        return weightService.getChange(since, to ?: LocalDate.now())
     }
 
 }
