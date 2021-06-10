@@ -3,7 +3,6 @@ package uk.lawrenceandrews.cico.api.calories
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
-import java.util.*
 
 @RestController
 @RequestMapping("/calories")
@@ -18,7 +17,7 @@ class CaloriesController(
 
     @PostMapping("")
     fun addRecording(
-        @RequestBody recording: CaloriesRecording
+            @RequestBody recording: CaloriesRecording
     ) {
         caloriesService.add(recording)
     }

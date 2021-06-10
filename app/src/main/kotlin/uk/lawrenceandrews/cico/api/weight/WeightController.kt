@@ -17,7 +17,7 @@ class WeightController(
 
     @PostMapping("")
     fun addRecording(
-        @RequestBody recording: WeightRecording
+            @RequestBody recording: WeightRecording
     ): String {
         weightService.add(recording)
 

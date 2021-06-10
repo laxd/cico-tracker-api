@@ -2,7 +2,6 @@ package uk.lawrenceandrews.cico.api.calories
 
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
-import java.util.*
 
 @Repository
 class CaloriesRepository {

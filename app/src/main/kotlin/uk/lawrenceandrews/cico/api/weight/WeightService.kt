@@ -18,13 +18,13 @@ class WeightService(
     }
 
     fun getAverage(from: LocalDate, to: LocalDate): Double {
-        if(from.isAfter(to)) {
+        if (from.isAfter(to)) {
             return 0.0
         }
 
         val results = weightRepository.findByDateBetween(from, to)
 
-        if(results.isEmpty()) {
+        if (results.isEmpty()) {
             return 0.0
         }
 
@@ -45,13 +45,13 @@ class WeightService(
     fun getChange(from: LocalDate, to: LocalDate): Double {
         val fromWeight = weightRepository.findFirstByDateAfter(from)
 
-        if(fromWeight == null) {
+        if (fromWeight == null) {
             return 0.0
         }
 
         val toWeight = weightRepository.findFirstByDateAfter(to)
 
-        if(toWeight == null) {
+        if (toWeight == null) {
             // This shouldn't ever happen, as to should be after from
             return 0.0
         }

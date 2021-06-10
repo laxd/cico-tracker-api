@@ -5,7 +5,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.LocalDate
 
 internal class WeightServiceTest {

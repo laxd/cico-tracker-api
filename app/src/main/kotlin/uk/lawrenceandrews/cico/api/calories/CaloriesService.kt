@@ -3,11 +3,10 @@ package uk.lawrenceandrews.cico.api.calories
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
-import java.util.*
 
 @Service
 class CaloriesService(
-    private val caloriesRepository: CaloriesRepository
+        private val caloriesRepository: CaloriesRepository
 ) {
 
     fun getAll(): List<CaloriesRecording> {
