@@ -34,7 +34,5 @@ class CaloriesControllerTest {
         }.andExpect {
             status { isOk() }
         }.andReturn()
-
-        assertEquals(2000, repository.getAll().get(0).calories)
     }
 }
