@@ -1,7 +1,6 @@
 package uk.lawrenceandrews.cico.api.calories
 
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -14,13 +13,13 @@ import org.springframework.test.web.servlet.post
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class CaloriesControllerTest {
+class RecordingControllerTest {
 
     @Autowired
-    private lateinit var controller: CaloriesController
+    private lateinit var controller: RecordingController
 
     @Autowired
-    private lateinit var repository: CaloriesRepository
+    private lateinit var repository: RecordingRepository
 
     @Autowired
     private lateinit var mockMvc: MockMvc
