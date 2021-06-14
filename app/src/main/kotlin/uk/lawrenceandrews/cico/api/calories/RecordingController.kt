@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 @RequestMapping("/recordings")
 class RecordingController(
