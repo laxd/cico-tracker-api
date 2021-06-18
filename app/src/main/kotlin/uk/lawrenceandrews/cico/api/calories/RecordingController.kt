@@ -4,7 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 
-@CrossOrigin(origins = ["http://localhost:3000"])
+@CrossOrigin(origins = ["*"])
 @RestController
 @RequestMapping("/recordings")
 class RecordingController(
@@ -12,8 +12,16 @@ class RecordingController(
 ) {
 
     @GetMapping("")
-    fun getAll(): Iterable<Recording> {
-        return recordingService.getAll()
+    fun getAll(): Map<LocalDate, Recording> {
+        return recordingService.getAll().associateBy({ it.date }, { it })
+    }
+
+    @GetMapping("between")
+    fun getBetween(
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate
+    ): Map<LocalDate, Recording>  {
+        return recordingService.getBetween(from, to).associateBy({ it.date }, {it})
     }
 
     @PostMapping("")

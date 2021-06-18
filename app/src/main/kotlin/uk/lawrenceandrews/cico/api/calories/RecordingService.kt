@@ -60,4 +60,8 @@ class RecordingService(
         )
     }
 
+    fun getBetween(from: LocalDate, to: LocalDate): List<Recording> {
+        return recordingRepository.findByDateBetween(from, to)
+    }
+
 }

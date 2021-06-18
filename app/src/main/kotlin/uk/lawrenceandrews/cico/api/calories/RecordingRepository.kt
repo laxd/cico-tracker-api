@@ -2,7 +2,6 @@ package uk.lawrenceandrews.cico.api.calories
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
-import uk.lawrenceandrews.cico.api.weight.WeightRecording
 import java.time.LocalDate
 
 @Repository
