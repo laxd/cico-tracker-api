@@ -2,6 +2,7 @@ package uk.lawrenceandrews.cico.api.calories
 
 import org.springframework.stereotype.Service
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 @Service
 class RecordingService(
@@ -23,40 +24,32 @@ class RecordingService(
         return recordingRepository.save(existingRecording)
     }
 
+    fun getMostRecent(): Recording? {
+        return recordingRepository.findFirstByOrderByDateDesc()
+    }
+
     /**
-     * Get the average calories recorded between the two dates.
+     * Get the statistics for recordings between the two dates.
+     *
+     * Statistics include average calories, average weight and change in weight
      *
      * The average is calculated based on the number of days that have data in them. Days
      * where the recorded calories are `null` are not included in the average. Days where the recorded
      * calories are `0` ARE included in the average.
      */
-    fun getAverage(from: LocalDate, to: LocalDate): Average {
-        val results = recordingRepository.findByDateBetween(from, to)
+    fun getStats(from: LocalDate, to: LocalDate): RecordingStatistics {
+        val recordingsBetween = recordingRepository.findByDateBetween(from, to)
 
-        val averageCalories = results
-            .mapNotNull { r -> r.calories }
-            .average()
+        val startWeight = recordingsBetween.firstOrNull { r -> r.weight != null }?.weight ?: 0.0
+        val endWeight = recordingsBetween.lastOrNull { r -> r.weight != null }?.weight ?: 0.0
 
-        val averageWeight = results
-            .mapNotNull { r -> r.weight }
-            .average()
-
-        return Average(from, to, averageCalories.toInt(), averageWeight)
-    }
-
-    fun getMostRecent(): Recording? {
-        return recordingRepository.findFirstByOrderByDateDesc()
-    }
-
-    fun getChange(from: LocalDate, to: LocalDate): Change {
-        val fromRecording = recordingRepository.findFirstByDateAfter(from)
-        val toRecording = recordingRepository.findFirstByDateAfter(to)
-
-        return Change(
+        return RecordingStatistics(
             from,
             to,
-            (fromRecording?.calories ?: 0) - (toRecording?.calories ?: 0),
-            (fromRecording?.weight ?: 0.0) - (toRecording?.weight ?: 0.0)
+            from.until(to, ChronoUnit.DAYS).toInt(),
+            recordingsBetween.mapNotNull { r -> r.calories }.average(),
+            recordingsBetween.mapNotNull { r -> r.weight }.average(),
+            endWeight - startWeight
         )
     }
 

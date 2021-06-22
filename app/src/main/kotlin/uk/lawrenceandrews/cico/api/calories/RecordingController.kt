@@ -12,16 +12,16 @@ class RecordingController(
 ) {
 
     @GetMapping("")
-    fun getAll(): Map<LocalDate, Recording> {
-        return recordingService.getAll().associateBy({ it.date }, { it })
+    fun getAll(): Iterable<Recording> {
+        return recordingService.getAll()
     }
 
     @GetMapping("between")
     fun getBetween(
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate,
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate
-    ): Map<LocalDate, Recording>  {
-        return recordingService.getBetween(from, to).associateBy({ it.date }, {it})
+    ): Iterable<Recording>  {
+        return recordingService.getBetween(from, to)
     }
 
     @PostMapping("")
@@ -31,24 +31,16 @@ class RecordingController(
         return recordingService.save(recording)
     }
 
-    @GetMapping("/average")
-    fun getAverages(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate
-    ): Average {
-        return recordingService.getAverage(from, to)
-    }
-
     @GetMapping("/current")
     fun getCurrentWeight(): Recording? {
         return recordingService.getMostRecent()
     }
 
-    @GetMapping("/change")
+    @GetMapping("/stats")
     fun getChange(
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate,
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate?
-    ): Change {
-        return recordingService.getChange(from, to ?: LocalDate.now())
+    ): RecordingStatistics {
+        return recordingService.getStats(from, to ?: LocalDate.now())
     }
 }

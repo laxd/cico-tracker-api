@@ -8,7 +8,6 @@ import java.time.LocalDate
 interface RecordingRepository: CrudRepository<Recording, Int> {
 
     fun findByDate(date: LocalDate): Recording?
-    fun findFirstByDateAfter(date: LocalDate): Recording?
     fun findByDateBetween(from: LocalDate, to: LocalDate): List<Recording>
     fun findFirstByOrderByDateDesc(): Recording?
 }
