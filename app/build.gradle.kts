@@ -35,8 +35,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.apache.httpcomponents:httpclient")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-junit5"))
     testImplementation("io.mockk:mockk:1.10.6")
     implementation("com.h2database:h2:1.4.200")
 }
@@ -51,4 +51,3 @@ application {
     // Define the main class for the application.
     mainClass.set("uk.lawrenceandrews.cico.api.AppKt")
 }
-
